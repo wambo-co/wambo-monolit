@@ -36,6 +36,7 @@ function Cart(){
 
         localStorage.setItem('cart', JSON.stringify(this));
     }
+
 }
 
 // CartItem

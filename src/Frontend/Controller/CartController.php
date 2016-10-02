@@ -24,4 +24,11 @@ class CartController
 
         ]);
     }
+
+    public function content(RequestInterface $request, ResponseInterface $response)
+    {
+        $cart = json_decode($_POST['cart']);
+        var_dump( $cart ) ;
+    }
+
 }

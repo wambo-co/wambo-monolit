@@ -55,6 +55,8 @@ class Registration implements ModuleBootstrapInterface
         $app->get('/cart', ['CartController', 'index']);
         $app->post('/cart', ['CartController', 'index']);
 
+        $app->post('/cart/content', ['CartController', 'content']);
+
     }
 
     /**
