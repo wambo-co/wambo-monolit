@@ -1,0 +1,45 @@
+{
+  "name": "wambo/demo",
+  "description": "a demo store with the wambo system",
+  "type": "project",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "René Penner",
+      "email": "rene@penner.name",
+      "role": "Developer"
+    },
+    {
+      "name": "Andy Koch",
+      "email": "andy@ak7.io",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Wambo\\": "src",
+      "TwigMoney\\": "twig"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Wambo\\": "tests"
+    }
+  },
+  "require": {
+    "slim/slim": "v3.5.0",
+    "php-di/slim-bridge": "^1.0",
+    "tedivm/stash": "^0.14.1",
+    "mathiasverraes/money": "v3.0.0-beta.2",
+    "ramsey/uuid": "^3.5",
+    "slim/twig-view": "^2.1",
+    "twig/extensions": "^1.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.5.5",
+    "league/flysystem-memory": "^1.0"
+  },
+  "repositories": [],
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

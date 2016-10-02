@@ -1,0 +1,76 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    <link rel="canonical" href="{{ page.url }}">
+
+    {% block head %}
+    {% endblock %}
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/minicart.css">
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Wambo Demo Store</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <!--
+                <li class="active"><a href="#">Category one <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Category two</a></li>
+                -->
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" id="minicart">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        <span class="minicart-items-qty"></span>
+                        <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-cart minicart-items" role="menu">
+
+                        <li class="divider"></li>
+                        <li><a class="text-center" href="/cart">View Cart</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+        {% block content %}{% endblock %}
+
+    </div>
+
+    <!-- jQuery 3.1.1 -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="application/javascript" src="/js/wambo.js"></script>
+    <script type="application/javascript" src="/js/minicart.js"></script>
+    <script type="application/javascript">
+        var cart = new Cart();
+        cart.init();
+
+        var minicart = new MiniCart("#minicart");
+        minicart.update(cart);
+    </script>
+    {% block javascript %}
+    {% endblock %}
+</body>
+</html>

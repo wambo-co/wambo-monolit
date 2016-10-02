@@ -1,0 +1,35 @@
+[
+  {
+    "sku": "t-shirt-no-1",
+    "price": {
+      "amount": 123,
+      "currency": "EUR"
+    },
+    "slug": "t-shirt-no-1",
+    "title": "T-Shirt No. 1",
+    "summary": "Our T-Shirt No. 1",
+    "description": "Our fancy T-Shirt No. 1 is ..."
+  },
+  {
+    "sku": "t-shirt-no-2",
+    "price": {
+      "amount": 2343,
+      "currency": "EUR"
+    },
+    "slug": "t-shirt-no-2",
+    "title": "T-Shirt No. 2",
+    "summary": "Our T-Shirt No. 2",
+    "description": "Our fancy T-Shirt No. 2 is ..."
+  },
+  {
+    "sku": "t-shirt-no-3",
+    "price": {
+      "amount": 3212,
+      "currency": "EUR"
+    },
+    "slug": "t-shirt-no-3",
+    "title": "T-Shirt No. 3",
+    "summary": "Our T-Shirt No. 3",
+    "description": "Our fancy T-Shirt No. 3 is ..."
+  }
+]

@@ -1,0 +1,29 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <h1>Wombology</h1>
+    <p class="lead">I Wambo, you  wambo,  he  she  me  wambos, wombology,  the  study  of  wambo. It's     first     grade,     Spongebob!</p>
+    <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+</div>
+
+</div>
+<!-- Products -->
+{% for product in overview.products %}
+<div class="product col-sm-4 col-md-3">
+    <div class="thumbnail">
+        <img src="http://lorempixel.com/200/100/" alt="100%x200" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+        <header class="caption">
+            <h3><a href="{{ product.uri }}">{{ product.title }}</a></h3>
+        </header>
+        <section title="summary">{{ product.summary }}</section>
+        <section title="description">{{ product.description }}</section>
+    </div>
+</div>
+{% else %}
+No products available
+{% endfor %}
+
+
+{% endblock %}
