@@ -7,7 +7,7 @@ function MiniCart(id){
         '<li>\
             <span class="item">\
                 <span class="item-left"> \
-                    <img src="http://lorempixel.com/50/50/" alt="" /> \
+                    <img src="/images/cat.jpg" alt="" width="50px"/> \
                     <span class="item-info"> \
                         <span>{{qty}}x {{name}}</span> \
                         <span>{{price}}</span> \

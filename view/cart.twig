@@ -5,29 +5,13 @@
     <h1>Cart</h1>
 
     <div id="cart_content">
-        <!--
-        <table>
-            <tr><th>SKU</th><th>Qty</th></tr>
-        </table>
-        -->
     </div>
 {% endblock %}
 
 {% block javascript %}
     <script>
         $.post("cart/content", {"cart":JSON.stringify(cart)}, function( content ) {
-                    $( "#cart_content" ).html( content );
-                });
-
-        /*
-        $(cart.items).each(function(index, item){
-            $("#cart_content table").append(
-                    '<tr>' +
-                    '<td>' + item.sku +  '</td>' +
-                    '<td>' + item.qty +  '</td>' +
-                    '</tr>'
-            );
+            $( "#cart_content" ).html( content );
         });
-        */
     </script>
 {% endblock %}
