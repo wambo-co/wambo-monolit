@@ -10,15 +10,15 @@
 
 </div>
 <!-- Products -->
-{% for product in overview.products %}
+{% for product in products %}
 <div class="product col-sm-4 col-md-3">
     <div class="thumbnail">
         <img src="/images/cat.jpg" alt="100%x200" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
         <header class="caption">
-            <h3><a href="{{ product.uri }}">{{ product.title }}</a></h3>
+            <h3><a href="{{ path_for('product_details', {"slug": product.slug }) }}">{{ product.getTitle }}</a></h3>
         </header>
-        <section title="summary">{{ product.summary }}</section>
-        <section title="description">{{ product.description }}</section>
+        <section title="summary">{{ product.getSummary }}</section>
+        <section title="description">{{ product.getDescription }}</section>
     </div>
 </div>
 {% else %}

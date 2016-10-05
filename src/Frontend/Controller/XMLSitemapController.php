@@ -4,31 +4,31 @@ namespace Wambo\Frontend\Controller;
 
 use Slim\Http\Response;
 use Slim\Views\Twig;
-use Wambo\Frontend\Orchestrator\XMLSitemapOrchestrator;
+use Wambo\Catalog\ProductRepositoryInterface;
 
 class XMLSitemapController
 {
-    /**
-     * @var XMLSitemapOrchestrator
-     */
-    private $XMLSitemapOrchestrator;
     /**
      * @var Twig
      */
     private $renderer;
 
-    public function __construct(XMLSitemapOrchestrator $XMLSitemapOrchestrator, Twig $renderer)
+    /**
+     * @var ProductRepositoryInterface
+     */
+    private $productRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository, Twig $renderer)
     {
-        $this->XMLSitemapOrchestrator = $XMLSitemapOrchestrator;
         $this->renderer = $renderer;
+        $this->productRepository = $productRepository;
     }
 
     public function sitemap(Response $response)
     {
         $response = $response->withHeader("Content-Type", "text/xml");
-        $sitemap = $this->XMLSitemapOrchestrator->getXMLSitemap();
         return $this->renderer->render($response, 'xmlsitemap.twig', [
-            "sitemap" => $sitemap,
+            "products" => $this->productRepository->getProducts(),
         ]);
     }
 }

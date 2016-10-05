@@ -6,6 +6,10 @@ use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Twig;
+use Wambo\Catalog\Model\Product;
+use Wambo\Catalog\Model\Slug;
+use Wambo\Catalog\ProductRepository;
+use Wambo\Catalog\ProductRepositoryInterface;
 use Wambo\Frontend\Exception\ProductNotFoundException;
 use Wambo\Frontend\Orchestrator\PageOrchestrator;
 use Wambo\Frontend\Orchestrator\ProductDetailsOrchestrator;
@@ -23,39 +27,26 @@ class CatalogController
 
     /** @var ErrorController $errorController */
     private $errorController;
-
-    /** @var PageOrchestrator */
-    private $pageOrchestrator;
-
-    /** @var ProductOverviewOrchestrator */
-    private $productOverviewOrchestrator;
-
-    /** @var ProductDetailsOrchestrator */
-    private $productDetailsOrchestrator;
+    /**
+     * @var ProductRepositoryInterface
+     */
+    private $productRepository;
 
     /**
      * Creates a new instance of the CatalogController class.
      *
-     * @param ErrorController             $errorController
-     * @param Twig                        $renderer
-     * @param PageOrchestrator            $pageOrchestrator
-     * @param ProductOverviewOrchestrator $productOverviewOrchestrator
-     * @param ProductDetailsOrchestrator  $productDetailsOrchestrator
+     * @param ErrorController            $errorController
+     * @param Twig                       $renderer
+     * @param ProductRepositoryInterface $productRepository
      */
     public function __construct(
         ErrorController $errorController,
         Twig $renderer,
-        PageOrchestrator $pageOrchestrator,
-        ProductOverviewOrchestrator $productOverviewOrchestrator,
-        ProductDetailsOrchestrator $productDetailsOrchestrator
+        ProductRepositoryInterface $productRepository
     ) {
         $this->errorController = $errorController;
         $this->renderer = $renderer;
-
-        // view model orchestrators
-        $this->pageOrchestrator = $pageOrchestrator;
-        $this->productOverviewOrchestrator = $productOverviewOrchestrator;
-        $this->productDetailsOrchestrator = $productDetailsOrchestrator;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -67,16 +58,13 @@ class CatalogController
      */
     public function overview(Response $response)
     {
-        $pageViewModel = $this->pageOrchestrator->getPageModel(
-            "Overview",
-            "Product overview"
-        );
-
-        $overviewViewModel = $this->productOverviewOrchestrator->getProductOverviewModel();
-
         return $this->renderer->render($response, 'overview.twig', [
-            "page" => $pageViewModel,
-            "overview" => $overviewViewModel,
+            "page" => [
+                "title" => "Overview",
+                "description" => "Product overview",
+                "url" => "/",
+            ],
+            "products" => $this->productRepository->getProducts(),
         ]);
     }
 
@@ -92,17 +80,16 @@ class CatalogController
     public function productDetails(string $slug, Request $request, Response $response)
     {
         try {
-            $productViewModel = $this->productDetailsOrchestrator->getProductDetailsModel($slug);
 
-            $pageViewModel = $this->pageOrchestrator->getPageModel(
-                $productViewModel->title,
-                $productViewModel->description,
-                $productViewModel->uri
-            );
+            $product = $this->getProductBySlug(new Slug($slug));
 
             $viewModel = [
-                "page" => $pageViewModel,
-                "product" => $productViewModel
+                "page" => [
+                    "title" => "Overview",
+                    "description" => "Product overview",
+                    "url" => "/",
+                ],
+                "product" => $product
             ];
 
             return $this->renderer->render($response, 'product.twig', $viewModel);
@@ -110,5 +97,16 @@ class CatalogController
         } catch (ProductNotFoundException $productNotFoundException) {
             return $this->errorController->error404($request, $response);
         }
+    }
+
+    private function getProductBySlug(Slug $slug): Product {
+        foreach ($this->productRepository->getProducts() as $product) {
+            /** @var Product $product */
+            if ($product->getSlug()->__toString() == $slug->__toString()) {
+                return $product;
+            }
+        }
+
+        throw new ProductNotFoundException(sprintf("No product with slug %s found", $slug));
     }
 }

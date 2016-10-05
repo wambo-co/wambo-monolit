@@ -43,14 +43,10 @@ class Registration implements ModuleBootstrapInterface
     private function registerRoutes(App $app)
     {
         // overview
-        /** @var \Wambo\Frontend\Service\URL\GenericURLProvider $genericURLProvider */
-        $genericURLProvider = $app->getContainer()->get(GenericURLProvider::class);
-        $app->get($genericURLProvider->getUrlPattern(), ['CatalogController', 'overview']);
+        $app->get("/", ['CatalogController', 'overview'])->setName("overview");
 
         // product details
-        /** @var \Wambo\Frontend\Service\URL\ProductURLProvider $productURLProvider */
-        $productURLProvider = $app->getContainer()->get(ProductURLProvider::class);
-        $app->get($productURLProvider->getUrlPattern(), ['CatalogController', 'productDetails']);
+        $app->get("/product/{slug}", ['CatalogController', 'productDetails'])->setName("product_details");
 
         // cart
         $app->get('/cart', ['CartController', 'index']);
