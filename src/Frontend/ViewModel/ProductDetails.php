@@ -16,6 +16,9 @@ class ProductDetails
     /** @var string $uri */
     public $uri;
 
+    /** @var string $slug */
+    public $slug;
+
     /** @var string $title The product title */
     public $title;
 
