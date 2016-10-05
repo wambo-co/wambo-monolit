@@ -3,6 +3,7 @@ namespace Wambo\Catalog;
 
 use Wambo\Catalog\Exception\RepositoryException;
 use Wambo\Catalog\Model\Product;
+use Wambo\Catalog\Model\Slug;
 
 /**
  * The ProductRepositoryInterface interface provides function for reading and writing Products from and to a storage.
@@ -21,6 +22,8 @@ interface ProductRepositoryInterface
     public function getProducts();
 
     public function getById(string $id);
+
+    public function getProductBySlug(Slug $slug): Product;
 
     public function add(Product $product);
 

@@ -81,7 +81,7 @@ class CatalogController
     {
         try {
 
-            $product = $this->getProductBySlug(new Slug($slug));
+            $product = $this->productRepository->getProductBySlug(new Slug($slug));
 
             $viewModel = [
                 "page" => [
@@ -99,14 +99,5 @@ class CatalogController
         }
     }
 
-    private function getProductBySlug(Slug $slug): Product {
-        foreach ($this->productRepository->getProducts() as $product) {
-            /** @var Product $product */
-            if ($product->getSlug()->__toString() == $slug->__toString()) {
-                return $product;
-            }
-        }
 
-        throw new ProductNotFoundException(sprintf("No product with slug %s found", $slug));
-    }
 }

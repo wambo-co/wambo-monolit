@@ -5,7 +5,9 @@ namespace Wambo\Catalog;
 use Wambo\Catalog\Exception\RepositoryException;
 use Wambo\Catalog\Mapper\ProductMapper;
 use Wambo\Catalog\Model\Product;
+use Wambo\Catalog\Model\Slug;
 use Wambo\Core\Storage\StorageInterface;
+use Wambo\Frontend\Exception\ProductNotFoundException;
 
 /**
  * Class ProductRepository fetches Product models from the Storage and writes Products back to the Storage
@@ -61,6 +63,17 @@ class ProductRepository implements ProductRepositoryInterface
         } catch (\Exception $readException) {
             throw new RepositoryException("Failed to read products from storage provider.", $readException);
         }
+    }
+
+    public function getProductBySlug(Slug $slug): Product {
+        foreach ($this->getProducts() as $product) {
+            /** @var Product $product */
+            if ($product->getSlug()->__toString() == $slug->__toString()) {
+                return $product;
+            }
+        }
+
+        throw new ProductNotFoundException(sprintf("No product with slug %s found", $slug));
     }
 
     public function getById(string $id)

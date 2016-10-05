@@ -5,13 +5,13 @@
 <!-- Product -->
 <div class="product">
     <header><h2><a href="{{ path_for('product_details', {"slug": product.slug }) }}">{{ product.title }}</a></h2></header>
-    <section title="summary">{{ product.summary }}</section>
-    <section title="description">{{ product.description }}</section>
+    <section title="summary">{{ product.content.summaryText }}</section>
+    <section title="description">{{ product.content.productDescription }}</section>
     <section title="price">{{ product.price.getFinalPrice() | moneyformat }}</section>
 
     <form action="/cart" method="post" id="addToCart">
         <input type="hidden" name="sku" value="{{ product.sku }}">
-        <input type="hidden" name="name" value="{{ product.title }}">
+        <input type="hidden" name="name" value="{{ product.content.title }}">
         <input type="hidden" name="amount" value="{{ product.price.getFinalPrice().getAmount() }}">
         <input type="hidden" name="currency" value="{{ product.price.getFinalPrice().getCurrency() }}">
         <fieldset>

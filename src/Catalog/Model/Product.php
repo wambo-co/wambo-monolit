@@ -71,34 +71,13 @@ class Product
     }
 
     /**
-     * Get the title of the product (e.g. "Fancy T-Shirt No. 1")
+     * Get the content of the product
      *
-     * @return string
+     * @return Content
      */
-    public function getTitle()
+    public function getContent()
     {
-        return $this->content->getTitle();
-    }
-
-    /**
-     * Get a short description text of the product (e.g. "The first edition of our fancy T-Shirt with a unicorn pooping
-     * ice cream on the front")
-     *
-     * @return string
-     */
-    public function getSummaryText()
-    {
-        return $this->content->getSummaryText();
-    }
-
-    /**
-     * Get a full product description text
-     *
-     * @return string
-     */
-    public function getProductDescription()
-    {
-        return $this->content->getProductDescription();
+        return $this->content;
     }
 
     /**
