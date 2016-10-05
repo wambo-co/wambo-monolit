@@ -18,18 +18,13 @@ class ErrorController
     /** @var Twig $renderer */
     private $renderer;
 
-    /** @var PageOrchestrator */
-    private $pageOrchestrator;
-
     /**
      * Creates a new instance of the ErrorController class.
      *
-     * @param PageOrchestrator $pageOrchestrator
      * @param Twig             $renderer
      */
-    public function __construct(PageOrchestrator $pageOrchestrator, Twig $renderer)
+    public function __construct(Twig $renderer)
     {
-        $this->pageOrchestrator = $pageOrchestrator;
         $this->renderer = $renderer;
     }
 
@@ -43,10 +38,10 @@ class ErrorController
      */
     public function error404(Request $request, Response $response)
     {
-        $pageViewModel = $this->pageOrchestrator->getPageModel("Page not found");
-
         $viewModel = [
-            "page" => $pageViewModel
+            "page" => [
+                "title" => "Page not found"
+            ]
         ];
 
         return $this->renderer->render($response->withStatus(404), 'error.twig', $viewModel);

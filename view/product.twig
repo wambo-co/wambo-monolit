@@ -4,7 +4,7 @@
 
 <!-- Product -->
 <div class="product">
-    <header><h2><a href="/product/{{ product.slug }}">{{ product.title }}</a></h2></header>
+    <header><h2><a href="{{ path_for('product_details', {"slug": product.slug }) }}">{{ product.title }}</a></h2></header>
     <section title="summary">{{ product.summary }}</section>
     <section title="description">{{ product.description }}</section>
     <section title="price">{{ product.price.getFinalPrice() | moneyformat }}</section>

@@ -13,6 +13,7 @@ use Wambo\Core\Module\ModuleBootstrapInterface;
 use Wambo\Frontend\Controller\CartController;
 use Wambo\Frontend\Controller\CatalogController;
 use Wambo\Frontend\Controller\ErrorController;
+use Wambo\Frontend\Controller\XMLSitemapController;
 use Wambo\Frontend\Service\URL\GenericURLProvider;
 use Wambo\Frontend\Service\URL\ProductURLProvider;
 
@@ -42,14 +43,10 @@ class Registration implements ModuleBootstrapInterface
     private function registerRoutes(App $app)
     {
         // overview
-        /** @var \Wambo\Frontend\Service\URL\GenericURLProvider $genericURLProvider */
-        $genericURLProvider = $app->getContainer()->get(GenericURLProvider::class);
-        $app->get($genericURLProvider->getUrlPattern(), ['CatalogController', 'overview']);
+        $app->get("/", ['CatalogController', 'overview'])->setName("overview");
 
         // product details
-        /** @var \Wambo\Frontend\Service\URL\ProductURLProvider $productURLProvider */
-        $productURLProvider = $app->getContainer()->get(ProductURLProvider::class);
-        $app->get($productURLProvider->getUrlPattern(), ['CatalogController', 'productDetails']);
+        $app->get("/product/{slug}", ['CatalogController', 'productDetails'])->setName("product_details");
 
         // cart
         $app->get('/cart', ['CartController', 'index']);
@@ -57,6 +54,8 @@ class Registration implements ModuleBootstrapInterface
 
         $app->post('/cart/content', ['CartController', 'content']);
 
+        // XML Sitemap
+        $app->get("/sitemap.xml", ['XMLSitemapController', 'sitemap']);
     }
 
     /**
@@ -97,6 +96,7 @@ class Registration implements ModuleBootstrapInterface
 
         // register: error controller
         $container->set('CatalogController', \DI\object(CatalogController::class));
+        $container->set('XMLSitemapController', \DI\object(XMLSitemapController::class));
         $container->set('CartController', \Di\object(CartController::class));
         $container->set('errorController', \DI\object(ErrorController::class));
         $container->set('notFoundHandler', function (ContainerInterface $container) {
