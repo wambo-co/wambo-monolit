@@ -60,6 +60,14 @@ class Product
     }
 
     /**
+     * @return PriceInterface
+     */
+    public function getPrice() : PriceInterface
+    {
+        return $this->price;
+    }
+
+    /**
      * Get the human-readable, descriptive URL fragment for the product (e.g.
      *                        "fancy-t-shirt-1-with-ice-cream-pooping-unicorn")
      *
@@ -79,13 +87,4 @@ class Product
     {
         return $this->content;
     }
-
-    /**
-     * @return PriceInterface
-     */
-    public function getPrice() : PriceInterface
-    {
-        return $this->price;
-    }
-
 }
