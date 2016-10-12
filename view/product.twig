@@ -2,24 +2,24 @@
 
 {% block content %}
 
-<!-- Product -->
-<div class="product">
-    <header><h2><a href="{{ path_for('product_details', {"slug": product.slug }) }}">{{ product.title }}</a></h2></header>
-    <section title="summary">{{ product.content.summaryText }}</section>
-    <section title="description">{{ product.content.productDescription }}</section>
-    <section title="price">{{ product.price.getFinalPrice() | moneyformat }}</section>
+    <!-- Product -->
+    <div class="product">
+        <header><h2><a href="{{ path_for('product_details', {"slug": product.slug }) }}">{{ product.getExtension('frontend').getTitle() }}</a></h2></header>
+        <section title="summary">{{ product.getExtension('frontend').getSummary() }}</section>
+        <section title="description">{{ product.getExtension('frontend').getDescription()}}</section>
+        <section title="price">{{ product.getExtension('cart').getFinalPrice()}}</section>  | moneyformat
 
-    <form action="/cart" method="post" id="addToCart">
-        <input type="hidden" name="sku" value="{{ product.sku }}">
-        <input type="hidden" name="name" value="{{ product.content.title }}">
-        <input type="hidden" name="amount" value="{{ product.price.getFinalPrice().getAmount() }}">
-        <input type="hidden" name="currency" value="{{ product.price.getFinalPrice().getCurrency() }}">
-        <fieldset>
-            Qty: <input type="text" name="qty" value="1" /><br />
-            <input type="submit" value="add to cart" />
-        </fieldset>
-    </form>
-</div>
+        <form action="/cart" method="post" id="addToCart">
+            <input type="hidden" name="sku" value="{{ product.sku }}">
+            <input type="hidden" name="name" value="{{ product.getExtension('frontend').getTitle() }}">
+            <input type="hidden" name="amount" value="{{ product.getExtension('cart').getTitle().getFinalPrice().getAmount() }}">
+            <input type="hidden" name="currency" value="{{ product.getExtension('cart').getTitle().getCurrency() }}">
+            <fieldset>
+                Qty: <input type="text" name="qty" value="1" /><br />
+                <input type="submit" value="add to cart" />
+            </fieldset>
+        </form>
+    </div>
 
 {% endblock %}
 

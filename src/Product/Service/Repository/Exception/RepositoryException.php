@@ -1,13 +1,17 @@
 <?php
-namespace Wambo\Core\Model\Exception;
+namespace Wambo\Product\Service\Repository\Exception;
+
+use Exception;
 
 /**
- * Class SKUException handles SKU-related errors.
+ * Class ProductException handles ProductRepository-related errors.
+ *
+ * @package Wambo\Catalog
  */
-class SKUException extends \Exception
+class RepositoryException extends Exception
 {
     /**
-     * SKUException constructor.
+     * RepositoryException constructor.
      *
      * @param string     $message        An error message
      * @param \Exception $innerException The underlying exception (optional)

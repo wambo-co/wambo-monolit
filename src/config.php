@@ -5,17 +5,18 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Psr\Cache\CacheItemPoolInterface;
 use Stash\Pool;
-use Wambo\Catalog\CachedProductRepository;
-use Wambo\Catalog\Mapper\ContentMapper;
-use Wambo\Catalog\Mapper\PriceMapper;
-use Wambo\Catalog\Mapper\ProductMapper;
-use Wambo\Catalog\ProductRepository;
-use Wambo\Catalog\ProductRepositoryInterface;
+use Wambo\Cart\Service\Mapper\CartProductMapper;
 use Wambo\Core\Module\JSONModuleStorage;
 use Wambo\Core\Module\ModuleMapper;
 use Wambo\Core\Module\ModuleRepository;
 use Wambo\Cart\Service\Storage\CartRepositoryInterface;
 use Wambo\Cart\Service\Storage\CartRepository;
+use Wambo\Frontend\Service\Mapper\FrontendProductMapper;
+use Wambo\Product\Service\Factory\ProductFactory;
+use Wambo\Product\Service\Mapper\ProductMapper;
+use Wambo\Product\Service\Repository\CachedProductRepository;
+use Wambo\Product\Service\Repository\ProductRepository;
+use Wambo\Product\Service\Repository\ProductRepositoryInterface;
 
 return [
     'settings.httpVersion' => '1.1',
@@ -38,25 +39,19 @@ return [
         return $cache;
     },
 
-    // Wambo modules
-    ModuleRepository::class => function (Filesystem $filesystem) {
-        $storage = new JSONModuleStorage($filesystem, 'vendor/modules.json');
-        $mapper = new ModuleMapper();
-
-        return new ModuleRepository($storage, $mapper);
-    },
-
     // product repository
     ProductRepositoryInterface::class => function (CacheItemPoolInterface $cache, Filesystem $filesystem) {
         $storage = new JSONModuleStorage($filesystem, "data/catalog.json");
 
         // product mapper
-        $contentMapper = new ContentMapper();
-        $priceMapper = new PriceMapper();
-        $productMapper = new ProductMapper($contentMapper, $priceMapper);
+        $productMapper = new ProductMapper();
+        $productFactory = new ProductFactory($productMapper, [
+            new FrontendProductMapper(),
+            new CartProductMapper()
+        ]);
 
         // create the product repository
-        $productRepository = new ProductRepository($storage, $productMapper);
+        $productRepository = new ProductRepository($storage, $productFactory);
 
         // create a cached version of the product repository
         $cachedProductRepository = new CachedProductRepository($cache, $productRepository);
