@@ -38,7 +38,7 @@ class CartProductMapper implements ProductMapperInterface
 
         // price
         $price_raw = $rawProductData[self::FIELD_PRICE];
-        $price = new Money($price_raw['ammunt'], new Currency($price_raw['currency']));
+        $price = new Money($price_raw['amount'], new Currency($price_raw['currency']));
 
         $cartProductExtension = new CartProductExtension($price);
         $product->addExtension('cart', $cartProductExtension);
