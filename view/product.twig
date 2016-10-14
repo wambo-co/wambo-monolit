@@ -4,7 +4,7 @@
 
     <!-- Product -->
     <div class="product">
-        <header><h2><a href="{{ path_for('product_details', {"slug": product.slug }) }}">{{ product.getExtension('frontend').getTitle() }}</a></h2></header>
+        <header><h2><a href="{{ path_for('product_details', {"slug": product.getExtension('frontend').slug }) }}">{{ product.getExtension('frontend').getTitle() }}</a></h2></header>
         <section title="summary">{{ product.getExtension('frontend').getSummary() }}</section>
         <section title="description">{{ product.getExtension('frontend').getDescription()}}</section>
         <section title="price">{{ product.getExtension('cart').getPrice() | moneyformat }}</section>
