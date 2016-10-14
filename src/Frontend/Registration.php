@@ -8,7 +8,7 @@ use Slim\Http\Uri;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use TwigMoney\TwigMoney;
-use Wambo\Cart\Controller\CartController;
+use Wambo\Frontend\Controller\CartController;
 use Wambo\Core\App;
 use Wambo\Core\Module\ModuleBootstrapInterface;
 use Wambo\Frontend\Controller\CatalogController;
