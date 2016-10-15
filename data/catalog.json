@@ -1,11 +1,11 @@
 [
   {
     "sku": "t-shirt-no-1",
+    "slug": "t-shirt-no-1",
     "price": {
-      "amount": 123,
+      "amount": 2343,
       "currency": "EUR"
     },
-    "slug": "t-shirt-no-1",
     "title": "T-Shirt No. 1",
     "summary": "Our T-Shirt No. 1",
     "description": "Our fancy T-Shirt No. 1 is ..."

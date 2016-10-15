@@ -25,7 +25,6 @@ class App extends \DI\Bridge\Slim\App
         $this->bootstrapFilePath = $bootstrapFilePath;
 
         parent::__construct();
-        $this->loadModules();
     }
 
     protected function configureContainer(ContainerBuilder $builder)
@@ -33,18 +32,5 @@ class App extends \DI\Bridge\Slim\App
         $builder->addDefinitions($this->bootstrapFilePath);
     }
 
-    /**
-     * add modules to App
-     */
-    private function loadModules()
-    {
-        /** @var ModuleRepository $repo */
-        $repo = $this->getContainer()->get(ModuleRepository::class);
 
-        /** @var Module $module */
-        foreach ($repo->getAll() as $module) {
-            $moduleClass = $module->getClass();
-            new $moduleClass($this);
-        }
-    }
 }

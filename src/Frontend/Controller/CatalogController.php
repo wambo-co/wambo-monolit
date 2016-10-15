@@ -6,14 +6,9 @@ use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Twig;
-use Wambo\Catalog\Model\Product;
-use Wambo\Catalog\Model\Slug;
-use Wambo\Catalog\ProductRepository;
-use Wambo\Catalog\ProductRepositoryInterface;
 use Wambo\Frontend\Exception\ProductNotFoundException;
-use Wambo\Frontend\Orchestrator\PageOrchestrator;
-use Wambo\Frontend\Orchestrator\ProductDetailsOrchestrator;
-use Wambo\Frontend\Orchestrator\ProductOverviewOrchestrator;
+use Wambo\Frontend\Model\Slug;
+use Wambo\Product\Service\Repository\ProductRepositoryInterface;
 
 /**
  * Class CatalogController contains the frontend controller actions for browsing the product catalog.
@@ -66,6 +61,7 @@ class CatalogController
             ],
             "products" => $this->productRepository->getProducts(),
         ]);
+
     }
 
     /**
@@ -79,6 +75,7 @@ class CatalogController
      */
     public function productDetails(string $slug, Request $request, Response $response)
     {
+
         try {
 
             $product = $this->productRepository->getProductBySlug(new Slug($slug));
@@ -97,6 +94,7 @@ class CatalogController
         } catch (ProductNotFoundException $productNotFoundException) {
             return $this->errorController->error404($request, $response);
         }
+
     }
 
 
