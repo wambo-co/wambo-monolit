@@ -2,23 +2,62 @@
 
 {% block content %}
 
+    <div class="content">
+
     <!-- Product -->
-    <div class="product">
-        <header><h2><a href="{{ path_for('product_details', {"slug": product.getExtension('frontend').slug }) }}">{{ product.getExtension('frontend').getTitle() }}</a></h2></header>
+    <div class="container product">
+
+        <header>
+            <h2>
+                <a href="{{ path_for('product_details', {"slug": product.getExtension('frontend').slug }) }}">{{ product.getExtension('frontend').getTitle() }}
+                </a>
+            </h2>
+        </header>
+
+        <div class="product-image">
+            <img src="/images/{{ product.getExtension('frontend').getImage()|default('cat.jpg') }}" alt="" style="width: 100%; max-width: 350px; max-height: 450px;" />
+        </div>
+
+        <br/>
         <section title="summary">{{ product.getExtension('frontend').getSummary() }}</section>
         <section title="description">{{ product.getExtension('frontend').getDescription()}}</section>
-        <section title="price">{{ product.getExtension('cart').getPrice() | moneyformat }}</section>
+
+        <br/>
+
+        <section class="product-descr" title="description">{{ product.getExtension('frontend').getDescription()}}</section>
+
+        <br/>
+
+        <div style="font-size: 20px;">
+            <section class="product-price" title="price">Preis: {{ product.getExtension('cart').getPrice() | moneyformat }}</section>
+        </div>
 
         <form action="/cart" method="post" id="addToCart">
+
             <input type="hidden" name="sku" value="{{ product.sku }}">
             <input type="hidden" name="name" value="{{ product.getExtension('frontend').getTitle() }}">
             <input type="hidden" name="amount" value="{{ product.getExtension('cart').getPrice().getAmount() }}">
             <input type="hidden" name="currency" value="{{ product.getExtension('cart').getPrice().getCurrency() }}">
-            <fieldset>
-                Qty: <input type="text" name="qty" value="1" /><br />
-                <input type="submit" value="add to cart" />
+
+            <br/>
+
+            <br/>
+            <fieldset class="product-qty">
+                <label>Menge:</label>
+                <input type="number" name="qty" value="1" class="form-control" style="width: 90px;" />
             </fieldset>
+
+            <br/>
+
+            <button type="submit" class="btn cta-btn center-btn">
+                <i class="glyphicon glyphicon-shopping-cart"></i>
+                IN DEN WAGEN
+            </button>
+
         </form>
+
+    </div>
+
     </div>
 
 {% endblock %}
@@ -34,7 +73,7 @@
             });
 
             var price = new Price( json.amount, json.currency);
-            var cartItem = new CartItem( json.sku, json.qty, price, json.name);
+            var cartItem = new CartItem( json.sku, json.qty, price, json.name, json.image);
             cart.add(cartItem);
             minicart.update(cart);
 

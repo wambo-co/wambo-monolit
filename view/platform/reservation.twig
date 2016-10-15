@@ -1,0 +1,40 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <h1>Brace Yourself. Wambo is Coming.</h1>
+    <h2>Reservier Deinen Wambo Shop Namen</h2>
+
+    <form action="{{ path_for('reserve') }}" method="post">
+
+        <br/>
+        <br/>
+
+        <div class="form-group">
+            <input type="email" class="form-control" name="email" placeholder="Deine E-Mail" value="" />
+        </div>
+
+
+        <div class="form-group">
+            <input type="text" class="form-control" name="handle" placeholder="Der Name für deinen Wambo Shop" value="" />
+        </div>
+
+        <br/>
+
+        <div style="text-align: center; width: 100%;">
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Reserve your Wambo Shop now" />
+            </div>
+
+            <small class="form-text text-muted">
+                Schnell. Einfach. Wambo!
+            </small>
+        </div>
+
+    </form>
+
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}

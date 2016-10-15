@@ -2,19 +2,13 @@
 
 {% block content %}
 
-<div class="jumbotron">
-    <h1>Wombology</h1>
-    <p class="lead">I Wambo, you  wambo,  he  she  me  wambos, wombology,  the  study  of  wambo. It's     first     grade,     Spongebob!</p>
-    <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
-</div>
-
 </div>
 <!-- Products -->
 {% for product in products %}
 <div class="product col-sm-4 col-md-3">
     <div class="thumbnail">
         <a href="{{ path_for('product_details', {"slug": product.getExtension('frontend').getSlug() }) }}">
-            <img src="/images/cat.jpg" alt="100%x200" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
+            <img src="/images/{{ product.getExtension('frontend').getImage()|default('cat.jpg') }}" alt="100%x200" style="height: 200px; width: 100%; display: block;" data-holder-rendered="true">
         </a>
         <header class="caption">
             <h3><a href="{{ path_for('product_details', {"slug": product.getExtension('frontend').getSlug() }) }}">{{ product.getExtension('frontend').getTitle() }}</a></h3>

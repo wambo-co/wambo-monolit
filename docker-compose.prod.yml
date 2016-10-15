@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  web:
+    image: nginx:1.10
+    ports:
+      - "8092:80"
+    depends_on:
+      - php
+    volumes_from:
+      - php
+    volumes:
+      - ./logs/nginx:/var/log/nginx
+    command: nginx -c /var/www/html/config/nginx/nginx.conf
+
+  php:
+    build: config/php/
+    user: www-data
+    volumes:
+      - .:/var/www/html
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+      - ./config/php/php-fpm.conf:/usr/local/etc/php-fpm.conf
+      - ./config/php/ext-xdebug.ini:/usr/local/etc/php/conf.d/ext-xdebug.ini

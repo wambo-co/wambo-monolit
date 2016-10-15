@@ -1,35 +1,83 @@
 [
-  {
-    "sku": "t-shirt-no-1",
-    "slug": "t-shirt-no-1",
-    "price": {
-      "amount": 2343,
-      "currency": "EUR"
+    {
+        "sku": "t-shirt-no-1",
+        "slug": "t-shirt-no-1",
+        "price": {
+            "amount": 2343,
+            "currency": "EUR"
+        },
+        "title": "T-Shirt No. 1",
+        "summary": "Our T-Shirt No. 1",
+        "description": "Our fancy T-Shirt No. 1 is ..."
     },
-    "title": "T-Shirt No. 1",
-    "summary": "Our T-Shirt No. 1",
-    "description": "Our fancy T-Shirt No. 1 is ..."
-  },
-  {
-    "sku": "t-shirt-no-2",
-    "price": {
-      "amount": 2343,
-      "currency": "EUR"
+    {
+        "sku": "c6a4158b",
+        "price": {
+            "amount": 123,
+            "currency": "EUR"
+        },
+        "slug": "t-shirt-no-3",
+        "title": "custom",
+        "summary": "custom",
+        "description": "Our fancy  product No. wambo is ..."
     },
-    "slug": "t-shirt-no-2",
-    "title": "T-Shirt No. 2",
-    "summary": "Our T-Shirt No. 2",
-    "description": "Our fancy T-Shirt No. 2 is ..."
-  },
-  {
-    "sku": "t-shirt-no-3",
-    "price": {
-      "amount": 3212,
-      "currency": "EUR"
+    {
+        "sku": "aeaa72b9",
+        "price": {
+            "amount": 123,
+            "currency": "EUR"
+        },
+        "slug": "aeaa72b9",
+        "title": "asdasdfasdfasdf",
+        "summary": "asdasdfasdfasdf",
+        "description": "Our fancy  product No. wambo is ..."
     },
-    "slug": "t-shirt-no-3",
-    "title": "T-Shirt No. 3",
-    "summary": "Our T-Shirt No. 3",
-    "description": "Our fancy T-Shirt No. 3 is ..."
-  }
+    {
+        "sku": "e15a069f",
+        "price": {
+            "amount": 123,
+            "currency": "EUR"
+        },
+        "slug": "e15a069f",
+        "title": "qwerqwer",
+        "summary": "qwerqwer",
+        "description": "Our fancy  product No. wambo is ...",
+        "image": "cat2.jpg"
+    },
+    {
+        "sku": "6cda27be",
+        "price": {
+            "amount": 123,
+            "currency": "EUR"
+        },
+        "image": "",
+        "slug": "6cda27be",
+        "title": "Socken",
+        "summary": "Socken",
+        "description": "Our fancy  product No. wambo is ..."
+    },
+    {
+        "sku": "5b6b724c",
+        "price": {
+            "amount": 123,
+            "currency": "EUR"
+        },
+        "image": "",
+        "slug": "5b6b724c",
+        "title": "",
+        "summary": "",
+        "description": "Our fancy  product No. wambo is ..."
+    },
+    {
+        "sku": "ea660637",
+        "price": {
+            "amount": 123,
+            "currency": "EUR"
+        },
+        "image": "",
+        "slug": "ea660637",
+        "title": "",
+        "summary": "",
+        "description": "Our fancy  product No. wambo is ..."
+    }
 ]

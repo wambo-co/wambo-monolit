@@ -8,6 +8,7 @@ use Slim\Http\Uri;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use TwigMoney\TwigMoney;
+use Wambo\Frontend\Controller\AdminController;
 use Wambo\Frontend\Controller\CartController;
 use Wambo\Core\App;
 use Wambo\Core\Module\ModuleBootstrapInterface;
@@ -41,8 +42,19 @@ class Registration implements ModuleBootstrapInterface
      */
     private function registerRoutes(App $app)
     {
+        // platform
+        $app->map(['get', 'post'], '/signup', ['PlatformController', 'signUp'])->setName('signUp');
+        $app->map(['get'], '/reservation', ['PlatformController', 'reservation'])->setName('reservation');
+        $app->map(['post'], '/reservation', ['PlatformController', 'reserve'])->setName('reserve');
+
+        $app->get('/', ['PlatformController', 'home'])->setName('home');
+
+        $app->get('/admin/config', ['AdminController', 'config'])->setName('admin_config');
+        $app->map(['get', 'post'], '/admin/product/add', ['AdminController', 'addProduct'])->setName('admin_product_add');
+        $app->post('/upload', ['AdminController', 'upload'])->setName('upload');
+
         // overview
-        $app->get("/", ['CatalogController', 'overview'])->setName("overview");
+        $app->get("/catalog/", ['CatalogController', 'overview'])->setName("overview");
 
         // product details
         $app->get("/product/{slug}", ['CatalogController', 'productDetails'])->setName("product_details");
@@ -53,8 +65,7 @@ class Registration implements ModuleBootstrapInterface
 
         $app->post('/cart/content', ['CartController', 'content']);
 
-        // plattforn
-        $app->get('/signup', ['PlatformController', 'signUp'])->setName('signUp');
+
 
         // XML Sitemap
         $app->get("/sitemap.xml", ['XMLSitemapController', 'sitemap']);
@@ -102,6 +113,7 @@ class Registration implements ModuleBootstrapInterface
         $container->set('CartController', \Di\object(CartController::class));
         $container->set('errorController', \DI\object(ErrorController::class));
         $container->set('PlatformController', \DI\object(PlatformController::class));
+        $container->set('AdminController', \DI\object(AdminController::class));
         $container->set('notFoundHandler', function (ContainerInterface $container) {
             return function (Request $request, Response $response) use ($container) {
                 /** @var ErrorController $errorController */

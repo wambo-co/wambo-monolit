@@ -2,13 +2,47 @@
 
 {% block content %}
 
-    <h1>SignUp</h1>
+    <div class="content">
 
-    <form>
-        <label>Name:
-            <input type="text" name="email" value="" />
-        </label>
-    </form>
+        <div class="step-heading">Schritt 1</div>
+
+        <div class="step1-container">
+
+            <div class="fill-form-title">Starte deinen eigenen Web-Shop</div>
+
+                <form action="{{ path_for('signUp') }}" method="post">
+
+                <br/>
+
+                    <div class="form-group">
+
+                        <div class="input-group">
+
+                            <input type="text" class="fill-form" name="email" placeholder="Deine E-Mail Adresse" value="" />
+
+                            <div class="input-group-btn">
+                            <input type="submit" class="btn cta-btn" value="LOS" />
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="text-center">
+                        <small class="form-text text-muted">
+                            Schnell. Einfach. Wambo!
+                        </small>
+                    </div>
+
+                </form>
+
+        </div>
+
+    </div>
+
+    <div class="setup-progress">
+        <img src="images/progress_1.png" width="112">
+    </div>
 
 {% endblock %}
 

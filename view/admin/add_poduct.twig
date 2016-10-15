@@ -1,0 +1,130 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <div class="content">
+
+    <div class="step-heading">Schritt 2</div>
+
+    <div class="step2-container">
+
+        <div class="fill-form-title">Füge dein erstes Produkt hinzu!</div>
+
+    <form class="setup-form" action="{{ path_for('admin_product_add') }}" method="POST">
+        <input type="hidden" name="image" value="" />
+
+        <div class="form-group">
+            <label class="fill-form-title" for="title">Titel deines Produkts</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Tippe um einen Namen einzugeben">
+        </div>
+
+        <br/>
+
+        <div class="form-group upload-container">
+
+            <label class="fill-form-title">Bild</label>
+
+            <div class="alert alert-danger hide" style="text-align: center;">
+                Es ist ein Fehler aufgetreten.
+            </div>
+
+            <div class="preview hide" style="text-align: center;">
+                <br/>
+                <img src="" style="border: 1px solid #ccc; border-radius: 4px;max-height: 220px; max-width: 220px;">
+            </div>
+
+            <div class="loading hide" style="text-align: center;">
+                Bitte warten... <br/>
+                <div class="progress" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropzone" style="width: 100%; padding: 20px 0 20px 0; border: 2px dotted #ccc; text-align: center; border-radius: 4px;">
+                <i class="glyphicon glyphicon-picture"></i> Produktbild hochladen
+            </div>
+
+        </div>
+
+        <br/>
+
+        <div class="form-group upload-container">
+            <label class="fill-form-title" for="price">Preis</label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="10,00">
+        </div>
+
+        <br/>
+
+        <button type="submit" style="width: 100%;" class="btn cta-btn">
+            ICH BIN BEREIT!
+        </button>
+
+    </form>
+
+    </div>
+
+    </div>
+
+    <div class="setup-progress">
+        <img src="/images/progress_2.png" width="112">
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+    <script>
+
+        var $uploadContainer = $('.upload-container');
+        var currFile = undefined;
+
+        // Dropzone.js init
+        var myDropzone = new Dropzone(document.body, {
+            url: '{{ path_for('upload')}}',
+            parallelUploads: 1,
+            maxFilesize: 50, // MB
+            acceptedFiles: 'image/*',
+            previewContainer: null,
+            clickable: ".dropzone",
+            addedfile: function(file) { /* do not show preview */ }
+        });
+
+        myDropzone.on("addedfile", function(file) {
+            currFile = file;
+
+            $uploadContainer.find(".loading .progress-bar").css("width", "0%");
+        });
+
+        // Upload on progress
+        myDropzone.on("uploadprogress", function(progress) {
+
+            $uploadContainer.find(".loading").removeClass("hide");
+            $uploadContainer.find('.dropzone').addClass('hide');
+            $uploadContainer.find(".loading .progress-bar").css("width", progress + "%");
+
+        });
+
+        // Upload error
+        myDropzone.on("error", function(err, resp) {
+
+            $uploadContainer.find('.alert-danger').removeClass('hide');
+
+        });
+
+        // Upload success
+        myDropzone.on("success", function(file, response) {
+
+            var respObj = JSON.parse(response);
+
+            // Show preview and hide dropzone
+            $uploadContainer.find(".loading").addClass("hide");
+            $uploadContainer.find('.preview').removeClass('hide');
+            $uploadContainer.find('.preview img').attr('src', '/images/' + respObj.image);
+            // add to hidden form element
+            $("form [name=image]").val(respObj.image);
+        });
+    </script>
+
+{% endblock %}

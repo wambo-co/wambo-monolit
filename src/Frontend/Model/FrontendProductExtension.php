@@ -25,18 +25,32 @@ class FrontendProductExtension implements ProductExtensionInterface
      */
     private $description;
 
+    /**
+     * @var string
+     */
+    private $image;
 
     /**
      * FrontendProductExtension constructor.
      * @param Slug $slug
      * @param string $title
+     * @param string $summery
+     * @param string $description
+     * @param string $image
      */
-    public function __construct(Slug $slug, string $title, string $summery, string $description)
+    public function __construct(
+        Slug $slug,
+        string $title,
+        string $summery,
+        string $description,
+        string $image
+    )
     {
         $this->slug = $slug;
         $this->title = $title;
         $this->summary = $summery;
         $this->description = $description;
+        $this->image = $image;
     }
 
     /**
@@ -69,5 +83,13 @@ class FrontendProductExtension implements ProductExtensionInterface
     public function getDescription() : string
     {
         return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage() : string
+    {
+        return $this->image;
     }
 }

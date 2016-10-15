@@ -40,11 +40,12 @@ function Cart(){
 }
 
 // CartItem
-function CartItem(sku, qty, price, name) {
+function CartItem(sku, qty, price, name, image) {
     this.sku = sku;
     this.qty = parseFloat(qty);
     this.price = price;
     this.name = name;
+    this.image = image;
 }
 
 function Price(amount, currency) {

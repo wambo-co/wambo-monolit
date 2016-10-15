@@ -7,7 +7,7 @@ function MiniCart(id){
         '<li>\
             <span class="item">\
                 <span class="item-left"> \
-                    <img src="/images/cat.jpg" alt="" width="50px"/> \
+                    <img src="/images/{{image}}" alt="" width="50px"/> \
                     <span class="item-info"> \
                         <span>{{qty}}x {{name}}</span> \
                         <span>{{price}}</span> \
@@ -37,6 +37,7 @@ function MiniCart(id){
 
             $(this.id + " .minicart-items li").first().before(
                 this.item_template
+                    .replace('{{image}}', item.image ? item.image : 'cat.jpg')
                     .replace('{{price}}', formated_price)
                     .replace('{{name}}', item.name)
                     .replace('{{qty}}', item.qty)

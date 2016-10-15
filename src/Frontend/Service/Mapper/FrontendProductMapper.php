@@ -13,11 +13,12 @@ class FrontendProductMapper implements ProductMapperInterface
     const FIELD_TITLE = 'title';
     const FIELD_SUMMARY = 'summary';
     const FIELD_DESCRIPTION = 'description';
+    const FIELD_IMAGE = 'image';
 
     /**
      * @var array $mandatoryFields A list of all mandatory fields of a Product
      */
-    private $mandatoryFields = [self::FIELD_SLUG];
+    private $mandatoryFields = [self::FIELD_SLUG, self::FIELD_TITLE];
 
     public function isMappable(array $rawProductData) : bool
     {
@@ -41,11 +42,12 @@ class FrontendProductMapper implements ProductMapperInterface
         $slug = new Slug($rawProductData[self::FIELD_SLUG]);
 
         // title
-        $title = $rawProductData[self::FIELD_SLUG];
+        $title = $rawProductData[self::FIELD_TITLE];
         $summery = $rawProductData[self::FIELD_SUMMARY];
         $description = $rawProductData[self::FIELD_DESCRIPTION];
+        $image = isset($rawProductData[self::FIELD_IMAGE]) ? $rawProductData[self::FIELD_IMAGE] : '';
 
-        $frontendProductExtension = new FrontendProductExtension($slug, $title, $summery, $description);
+        $frontendProductExtension = new FrontendProductExtension($slug, $title, $summery, $description, $image);
         $product->addExtension('frontend', $frontendProductExtension);
         return $product;
     }
