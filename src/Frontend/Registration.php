@@ -13,6 +13,7 @@ use Wambo\Core\App;
 use Wambo\Core\Module\ModuleBootstrapInterface;
 use Wambo\Frontend\Controller\CatalogController;
 use Wambo\Frontend\Controller\ErrorController;
+use Wambo\Frontend\Controller\PlatformController;
 use Wambo\Frontend\Controller\XMLSitemapController;
 
 /**
@@ -51,6 +52,9 @@ class Registration implements ModuleBootstrapInterface
         $app->post('/cart', ['CartController', 'index']);
 
         $app->post('/cart/content', ['CartController', 'content']);
+
+        // plattforn
+        $app->get('/signup', ['PlatformController', 'signUp'])->setName('signUp');
 
         // XML Sitemap
         $app->get("/sitemap.xml", ['XMLSitemapController', 'sitemap']);
@@ -97,6 +101,7 @@ class Registration implements ModuleBootstrapInterface
         $container->set('XMLSitemapController', \DI\object(XMLSitemapController::class));
         $container->set('CartController', \Di\object(CartController::class));
         $container->set('errorController', \DI\object(ErrorController::class));
+        $container->set('PlatformController', \DI\object(PlatformController::class));
         $container->set('notFoundHandler', function (ContainerInterface $container) {
             return function (Request $request, Response $response) use ($container) {
                 /** @var ErrorController $errorController */
