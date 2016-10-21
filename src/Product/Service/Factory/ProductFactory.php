@@ -17,7 +17,7 @@ class ProductFactory
         $this->extensionProductMapper = $extensionProductMapper;
     }
 
-    public function getProduct($rawProductData) : Product
+    public function getProduct(array $rawProductData) : Product
     {
         $product = $this->productMapper->getProduct($rawProductData);
 

@@ -1,11 +1,12 @@
 <?php
 
-namespace Wambo\Frontend\Controller;
+namespace Wambo\Product\Controller;
 
 use Psr\Http\Message\ResponseInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Twig;
+use Wambo\Frontend\Controller\ErrorController;
 use Wambo\Frontend\Exception\ProductNotFoundException;
 use Wambo\Frontend\Model\Slug;
 use Wambo\Product\Service\Repository\ProductRepositoryInterface;
@@ -15,16 +16,15 @@ use Wambo\Product\Service\Repository\ProductRepositoryInterface;
  *
  * @package Wambo\Frontend\Controller
  */
-class CatalogController
+class ProductController
 {
     /** @var Twig $renderer */
     private $renderer;
 
     /** @var ErrorController $errorController */
     private $errorController;
-    /**
-     * @var ProductRepositoryInterface
-     */
+
+    /** @var ProductRepositoryInterface */
     private $productRepository;
 
     /**

@@ -41,12 +41,6 @@ class Registration implements ModuleBootstrapInterface
      */
     private function registerRoutes(App $app)
     {
-        // overview
-        $app->get("/", ['CatalogController', 'overview'])->setName("overview");
-
-        // product details
-        $app->get("/product/{slug}", ['CatalogController', 'productDetails'])->setName("product_details");
-
         // cart
         $app->get('/cart', ['CartController', 'index']);
         $app->post('/cart', ['CartController', 'index']);
@@ -97,7 +91,6 @@ class Registration implements ModuleBootstrapInterface
         });
 
         // register: error controller
-        $container->set('CatalogController', \DI\object(CatalogController::class));
         $container->set('XMLSitemapController', \DI\object(XMLSitemapController::class));
         $container->set('CartController', \Di\object(CartController::class));
         $container->set('errorController', \DI\object(ErrorController::class));
