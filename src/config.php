@@ -7,8 +7,6 @@ use Psr\Cache\CacheItemPoolInterface;
 use Stash\Pool;
 use Wambo\Cart\Service\Mapper\CartProductMapper;
 use Wambo\Core\Module\JSONModuleStorage;
-use Wambo\Core\Module\ModuleMapper;
-use Wambo\Core\Module\ModuleRepository;
 use Wambo\Cart\Service\Storage\CartRepositoryInterface;
 use Wambo\Cart\Service\Storage\CartRepository;
 use Wambo\Frontend\Service\Mapper\FrontendProductMapper;
@@ -27,6 +25,20 @@ return [
     'settings.addContentLengthHeader' => true,
     'settings.routerCacheFile' => false,
 
+    'settings.debug'         => true,
+    'settings.whoops.editor' => 'sublime',
+
+    'settings' => [
+        'httpVersion' => \DI\get('settings.httpVersion'),
+        'responseChunkSize' => \DI\get('settings.responseChunkSize'),
+        'outputBuffering' => \DI\get('settings.outputBuffering'),
+        'determineRouteBeforeAppMiddleware' => \DI\get('settings.determineRouteBeforeAppMiddleware'),
+        'displayErrorDetails' => \DI\get('settings.displayErrorDetails'),
+        'addContentLengthHeader' => \DI\get('settings.addContentLengthHeader'),
+        'routerCacheFile' => \DI\get('settings.routerCacheFile'),
+        'debug'         => \DI\get('settings.debug'),
+        'whoops.editor' => \DI\get('settings.whoops.editor')
+    ],
 
     // local filesystem
     Filesystem::class => function () {

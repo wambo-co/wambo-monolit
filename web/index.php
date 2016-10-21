@@ -1,7 +1,10 @@
 <?php
 namespace Wambo\Core;
 
-use Wambo\Frontend\Registration;
+use Wambo\Developer\Whoops\Middleware as WhoopsMiddleware;
+use Wambo\Frontend\Registration as FrontendRegistration;
+use Wambo\Cart\Registration as CartRegistration;
+use \Wambo\Checkout\Registration as CheckoutRegistration;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -19,15 +22,9 @@ if (!file_exists($autoload_filename)) {
 require_once $autoload_filename;
 
 $app = new App(WAMBO_ROOT_DIR . '/src/config.php');
-
-// register frontend
-new Registration($app);
-
-// register cart
-new \Wambo\Cart\Registration($app);
-
-// register checkout
-new \Wambo\Checkout\Registration($app);
-
+new FrontendRegistration($app);
+new CartRegistration($app);
+new CheckoutRegistration($app);
+$app->add(new WhoopsMiddleware);
 
 $app->run();

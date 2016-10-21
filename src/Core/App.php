@@ -1,30 +1,24 @@
 <?php
 namespace Wambo\Core;
-use DI\ContainerBuilder;
-use Wambo\Core\Module\Module;
-use Wambo\Core\Module\ModuleRepository;
 
-/**
- * Class App
- * @package Wambo\Core
- */
+use DI\Container;
+use DI\ContainerBuilder;
+
 class App extends \DI\Bridge\Slim\App
 {
-    /**
-     * @var string
-     */
+
     private $bootstrapFilePath;
 
-    /**
-     * App constructor.
-     *
-     * @param string $bootstrapFilePath
-     */
     public function __construct(string $bootstrapFilePath)
     {
         $this->bootstrapFilePath = $bootstrapFilePath;
 
         parent::__construct();
+    }
+
+    public function getContainer() : Container
+    {
+        return parent::getContainer();
     }
 
     protected function configureContainer(ContainerBuilder $builder)
