@@ -3,6 +3,8 @@ namespace Wambo\Frontend\Controller;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Slim\Http\Request;
+use Slim\Http\Response;
 use Slim\Views\Twig;
 
 class CartController
@@ -25,10 +27,13 @@ class CartController
         ]);
     }
 
-    public function content(RequestInterface $request, ResponseInterface $response)
+    /**
+     * @param Request $request
+     * @param Response $response
+     */
+    public function content(Request $request, Response $response)
     {
-        $cart = json_decode($_POST['cart']);
-        var_dump( $cart ) ;
+        $cart = json_decode($request->getParam('cart'));
     }
 
 }

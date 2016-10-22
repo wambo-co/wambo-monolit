@@ -1,6 +1,6 @@
 <?php
 
-namespace Wambo\Frontend\Exception;
+namespace Wambo\Product\Exception;
 
 /**
  * Class ProductNotFoundException is used when a given product was not found.
