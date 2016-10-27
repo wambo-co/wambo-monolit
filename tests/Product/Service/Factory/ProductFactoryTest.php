@@ -26,7 +26,7 @@ class ProductFactoryTest extends TestCase
         $this->assertInstanceOf(Product::class, $productWithSaleableInterface);
 
         $frontendProductProvider = FrontendProductProvider::getFrontendProductExtension($productWithSaleableInterface);
-        echo $frontendProductProvider->getSlug();
+        $frontendProductProvider->getSlug();
     }
 
 

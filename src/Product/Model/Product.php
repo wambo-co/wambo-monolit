@@ -12,11 +12,6 @@ class Product
     private $sku;
 
     /**
-     * @var array
-     */
-    private $attributes;
-
-    /**
      * @var ProductExtensionInterface[]
      */
     private $productExtensions;
@@ -24,12 +19,10 @@ class Product
     /**
      * Product constructor.
      * @param SKU $sku
-     * @param array $attributes
      */
-    public function __construct(SKU $sku, array $attributes)
+    public function __construct(SKU $sku)
     {
         $this->sku = $sku;
-        $this->attributes = $attributes;
     }
 
     /**
@@ -38,14 +31,6 @@ class Product
     public function getSKU() : SKU
     {
         return $this->sku;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAttributes() : array
-    {
-        return $this->attributes;
     }
 
     /**

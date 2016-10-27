@@ -15,10 +15,9 @@ class ProductTest extends TestCase
         $attributes = ['somekey' => 'value'];
 
         // act
-        $product = new Product($sku, $attributes);
+        $product = new Product($sku);
 
         // assert
         $this->assertEquals($sku, $product->getSku());
-        $this->assertEquals($attributes, $product->getAttributes());
     }
 }
